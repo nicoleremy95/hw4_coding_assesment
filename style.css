@@ -1,5 +1,5 @@
 body{
-    background-color:#BEB9B5;
+    background-color: #eee;
 }
 
 
@@ -12,12 +12,8 @@ h1 {
     text-align: center;
     padding: 5px;
     font-size: 40px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     /* background-color: whitesmoke; */
-}
-
-h2 {
-    color: black
 }
 
 footer {
@@ -55,13 +51,14 @@ footer {
 #questionbox {
     padding: 10px;
     margin: 10px;
-    content: justify-center;
+    
     font-size: 30px;
 }
 
 #progress {
     padding-top: 20px;
     font-size: 20px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 #timer {

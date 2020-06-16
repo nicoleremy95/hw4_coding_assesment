@@ -33,7 +33,7 @@ var timeLeft = 10;
 //FUNCTIONS 
 // Start with a welcome function IF NOT WORKING COMMENT OUT 
 function welcome () {
-  questionBoxEl.textContent = ("Welcome to the coding quiz! You have 60 seconds to complete this quiz. Click 'start' to begin");
+  questionBoxEl.textContent = ('Welcome to the coding quiz! You have 60 seconds to complete this quiz. Click "start" to begin!');
   document.querySelector(".buttons").style.display = "none";
   document.querySelector("#progress").style.display ="none";
   document.querySelector(".recordscorecard").style.display = "none";
@@ -43,8 +43,6 @@ welcome();
 
 //create function that starts timer on start button click 
 function runTimer() {
-  // var timeLeft = 10;
-
   var timeInterval = setInterval(function() {
     countDownEl.textContent = timeLeft + " seconds remaining";
     timeLeft--;
@@ -54,7 +52,7 @@ function runTimer() {
       document.querySelector("#timer").style.display = "none";
       endGame();
       clearInterval(timeInterval);
-    }
+    } 
     else{
       askQuestion();
       showProgress();
@@ -108,11 +106,9 @@ function userScore() {
 // userScore();
 
 function endGame(){
-  var timeLeft = 0;
-  var timeInterval = 0;
-  clearInterval(timeInterval);
-
-
+  
+  // clears the timer function 
+  clearInterval(runTimer);
   //show user score
   questionBoxEl.textContent = ("Congratulations, you got " + score + " right!");
   //allow user to record score 

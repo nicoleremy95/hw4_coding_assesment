@@ -1,45 +1,119 @@
-var questionBox = document.getElementById("#questionbox");
-var answerBox = document.getElementsByClassName(".buttons");
+//when the user clicks the start button, the timer starts 
+//when someone enters initials, it will show scores 
+//show high scores
+//OBJECTS WITH QUESTIONS AND ANSWERS 
+//when person selects wrong answer, the timer looses time
+//game over event when times runs out or 
+var questionBoxEl = document.querySelector("#questionbox");
+var buttonsBtn = document.querySelector(".buttons");
+var progressEl = document.querySelector("#progress");
+var ans0 =document.querySelector("#btn0")
+var ans1 =document.querySelector("#btn1")
+var ans2 =document.querySelector("#btn2")
+var ans3 =document.querySelector("#btn3")
+var countDownEl = document.querySelector("#timer");
+var startBtn = document.querySelector("#start");
 
 // create an object Data Type with questions,options, and answers 
 var questions = [
     {questionNew: "typeOf is a ?", options: ["method", "type","property", "string"], answer: "method"},
-    {quesitonNew: "Globally scoped varibales are ______ of the function?", options: ["dependent", "inside", "outside", "independent"], answer: "outside"},
+    {questionNew: "globally scoped varibales are located where in relation to the function?", options: ["dependent", "inside", "outside", "independent"], answer: "outside"},
     {questionNew: "where should you include your css link?", options:["at the end of your body section", "in the footer tag","in the head tag", "before the html tag"], answer:"in the head tag"},
-    {questionNew: "What is the termimal command to merge a  repository from a local folder to the master folder?", options: ["git add .", "git commit -m", "git push", "git pull"], answer: "git pull"},
-    {quesitonNew: "Which of these is not a JavaScript Data Type?", options:["string", "boolean", "container", "array"], answer:"container"}
+    {questionNew: "what is the termimal command to merge a  repository from a local folder to the master folder?", options: ["git add .", "git commit -m", "git push", "git pull"], answer: "git pull"},
+    {questionNew: "Which of these is not a JavaScript Data Type?", options:["string", "boolean", "container", "array"], answer:"container"}
 ];
+
 // Create a number Data Type and set it equal to the variable "score". We start the game with a score of 0.
 var score = 0;
-//create variables
-var answer = (questions[i].answers);
-var userAnswer = (questions[i].options);
-//display the object on the HTML page 
-document.getElementById("#questionbox")=askQuestion(questions[i]);
-document.getElementsByClassName(".buttons");
-document.getElementsByClassName("#progress");
+var index = 0;
+
+function prepareQuiz() {
+  var timeLeft = 5;
+
+  var timeInterval = setInterval(function() {
+    countDownEl.textContent = timeLeft + " seconds remaining";
+    timeLeft--;
+
+    if (timeLeft === 0) {
+      countDownEl.textContent = "";
+      askQuestion();
+      clearInterval(timeInterval);
+    }
+
+  }, 1000);
+  
+}
 
 // create a function that runs through the question rounds 
-function askQuestion(questionNew,options,answer){
-    return (questionNew,options,answer);
+ function askQuestion(questionNew,options,answer){
+   //start timer 
+   
+    //create element
+
+    questionBoxEl.textContent=questions[index].questionNew;
+    //buttonsBtn.textContent=questions.options[i];
+    ans0.textContent=questions[index].options[0];
+    ans1.textContent=questions[index].options[1];
+    ans2.textContent=questions[index].options[2];
+    ans3.textContent=questions[index].options[3];
+  
 }
 //execute the function
+// askQuestion();
+
 askQuestion();
 
+
+buttonsBtn.addEventListener("click",function(event){
+  console.log(event.target.textContent);
+  index++
+  askQuestion();
+  
+})
 //create a function that calculates user score 
-function userScore(){
-// Loop over every question object
-for (var i = 0; i < questions.length; i++) {
-    // Compare answers. if the answer equals the index of the variable add 1 to score 
-    if (answer === userAnswer){
-      // Increase score
-      score++; 
-      console.log(score);
-    }  
-  }
-}
+// function userScore(){
+//   //set varibale userAnswer = whatever the user clicks 
+//     var userAnswer = 
+// //     // Compare answers. if the answer equals the index of the variable add 1 to score 
+//     if (userAnswer === questions[index].answer){
+//       // Increase score
+//       score++; 
+//     }  
+// //   }
+//  }
 // execute the function
-userScore();
+//  userScore();
+
+function showProgress(){
+  
+  progressEl.textContent = ("You have " + askQuestion() + "/" + questions.length)
+}
+//execute the function
+showProgress();
+//show user how many questions they have left with #progress 
+
+
+//show user final score by concatenating JavaScript string operators  
+// ("You got " + userScore() + "/" + questions.length)
+
+//display the new question on the HTML page 
+startBtn.addEventListener("click", prepareQuiz());
+questionBoxEl.addEventListener("click", askQuestion());
+progressEl.addEventListener("click", showProgress());
+
+// userAnswer.addEventListener("click", userScore());
+
+
+
+
+
+
+
+
+
+
+
+
 
     // show question on the page associated with the #questions
 
@@ -52,9 +126,3 @@ userScore();
     // update the users score for loop
    
     //timer if the user doesn't complete in given time use "break" and go to last page that shows score 
-
-    //show user how many questions they have left with #progress 
-    ("You have " + askQuestion() + "/" + questions.length)=document.getElementById("#progress")
-
-    //show user final score by concatenating JavaScript string operators  
-    ("You got " + userScore() + "/" + questions.length)

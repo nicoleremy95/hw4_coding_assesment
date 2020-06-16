@@ -13,6 +13,8 @@ var ans2 =document.querySelector("#btn2")
 var ans3 =document.querySelector("#btn3")
 var countDownEl = document.querySelector("#timer");
 var startBtn = document.querySelector("#start");
+// var welcomeStatement = document.querySelector("");
+// var endOfQuiz = document.querySelector("");
 
 // create an object Data Type with questions,options, and answers 
 var questions = [
@@ -27,16 +29,24 @@ var questions = [
 var score = 0;
 var index = 0;
 
-function prepareQuiz() {
-  var timeLeft = 5;
+function prepareQuiz(){
+  
+  runTimer();
+  askQuestion();
+}
+
+function runTimer() {
+  var timeLeft = 10;
+  console.log('hello')
 
   var timeInterval = setInterval(function() {
     countDownEl.textContent = timeLeft + " seconds remaining";
     timeLeft--;
+    console.log('hi')
 
     if (timeLeft === 0) {
       countDownEl.textContent = "";
-      askQuestion();
+      endGame();
       clearInterval(timeInterval);
     }
 
@@ -47,7 +57,7 @@ function prepareQuiz() {
 // create a function that runs through the question rounds 
  function askQuestion(questionNew,options,answer){
    //start timer 
-   
+  
     //create element
 
     questionBoxEl.textContent=questions[index].questionNew;
@@ -61,13 +71,20 @@ function prepareQuiz() {
 //execute the function
 // askQuestion();
 
-askQuestion();
+function endGame(){
+  alert("game over")
+}
 
 
 buttonsBtn.addEventListener("click",function(event){
   console.log(event.target.textContent);
   index++
-  askQuestion();
+  if(index === question.length){
+    endGame();
+  } else {
+    askQuestion();
+  }
+  
   
 })
 //create a function that calculates user score 
@@ -97,9 +114,10 @@ showProgress();
 // ("You got " + userScore() + "/" + questions.length)
 
 //display the new question on the HTML page 
-startBtn.addEventListener("click", prepareQuiz());
-questionBoxEl.addEventListener("click", askQuestion());
-progressEl.addEventListener("click", showProgress());
+
+startBtn.addEventListener("click", prepareQuiz);
+questionBoxEl.addEventListener("click", askQuestion);
+progressEl.addEventListener("click", showProgress);
 
 // userAnswer.addEventListener("click", userScore());
 

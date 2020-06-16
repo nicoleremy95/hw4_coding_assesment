@@ -105,6 +105,7 @@ function userScore() {
     console.log("correct");
   } 
 }
+// userScore();
 
 function endGame(){
   var timeLeft = 0;

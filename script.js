@@ -25,6 +25,13 @@ var score = 0;
 var index = 0;
 
 //FUNCTIONS 
+// Start with a welcome function IF NOT WORKING COMMENT OUT 
+// function welcome () {
+//   questionBoxEl.textContent = ("Welcome to the coding quiz! You have 60 seconds to complete this quiz. Click 'start' to begin");
+//   document.querySelector(".buttons").style.display = "none";
+//   document.querySelector("#progress").style.display ="none";
+// }
+
 //create function that starts timer on start button click 
 function runTimer() {
   var timeLeft = 10;
@@ -35,6 +42,7 @@ function runTimer() {
 
     if (timeLeft === 0) {
       countDownEl.textContent = "";
+      document.querySelector("#timer").style.display = "none";
       endGame();
       clearInterval(timeInterval);
     }
@@ -56,13 +64,17 @@ function runTimer() {
     ans1.textContent=questions[index].options[1];
     ans2.textContent=questions[index].options[2];
     ans3.textContent=questions[index].options[3];
+
+    document.querySelector("#start").style.display = "none";
+    
   
 }
 
+
 //create a function that cycles through the questions when a user clicks the answer choice
-function userAsnwer(event){
+function userAnswer(event){
   index++
-  if (index ===question.length){
+  if (index === uestion.length){
     endGame();
   }
   else{
@@ -72,42 +84,31 @@ function userAsnwer(event){
 
 function showProgress(){
   
-  progressEl.textContent = (index + " / " + questions.length + " remaining");
+  progressEl.textContent = (index + " / " + questions.length + " completed");
 }
 //execute the function
 showProgress();
 
+//IF NOT WORKING COMMENT OUT 
 // function userScore(){
-//   var userChoice =
+//   var userChoice = value of click 
 //   if(questions[index].answer === userChoice){
 //     score +++
 //   }
 // }
 
 function endGame(){
-  alert("game over")
+  
+  clearInterval(timeInterval);
   //show user score
+  questionBoxEl.textContent = ("Congratulations, you got " + userChoice + " right!")
   //allow user to record score 
+  //remove excess components 
+  document.querySelector("#progress").style.display = "none";
+  document.querySelector(".buttons").style.display = "none";
+
 }
 
-  
-  
-// })
-//create a function that calculates user score 
-// function userScore(){
-//   //set varibale userAnswer = whatever the user clicks 
-//     var userAnswer = 
-// //     // Compare answers. if the answer equals the index of the variable add 1 to score 
-//     if (userAnswer === questions[index].answer){
-//       // Increase score
-//       score++; 
-//     }  
-// //   }
-//  }
-// execute the function
-//  userScore();
-
-//show user how many questions they have left with #progress 
 
 
 
@@ -118,10 +119,10 @@ function endGame(){
 //display the new question on the HTML page 
 
 startBtn.addEventListener("click", runTimer);
-ans0.addEventListener("click", userAsnwer);
-ans1.addEventListener("click", userAsnwer);
-ans2.addEventListener("click", userAsnwer);
-ans3.addEventListener("click", userAsnwer);
+ans0.addEventListener("click", userAnswer);
+ans1.addEventListener("click", userAnswer);
+ans2.addEventListener("click", userAnswer);
+ans3.addEventListener("click", userAnswer);
 
 // userAnswer.addEventListener("click", userScore());
 

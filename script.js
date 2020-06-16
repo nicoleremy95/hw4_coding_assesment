@@ -127,9 +127,10 @@ function endGame(){
   document.querySelector("#highscore").style.display = "block";
  
 }
-// recordScoreBtn.addEventListener("click",function (event){
-//   event.preventDefault
-// }
+function recordScore (event){
+  event.preventDefault();
+}
+
 
 
 //event listeners 
@@ -138,6 +139,7 @@ ans0.addEventListener("click", userAnswer);
 ans1.addEventListener("click", userAnswer);
 ans2.addEventListener("click", userAnswer);
 ans3.addEventListener("click", userAnswer);
+recordScoreBtn.addEventListener("click", recordScore);
 
 
 

@@ -37,12 +37,10 @@ function prepareQuiz(){
 
 function runTimer() {
   var timeLeft = 10;
-  console.log('hello')
 
   var timeInterval = setInterval(function() {
     countDownEl.textContent = timeLeft + " seconds remaining";
     timeLeft--;
-    console.log('hi')
 
     if (timeLeft === 0) {
       countDownEl.textContent = "";
@@ -73,6 +71,8 @@ function runTimer() {
 
 function endGame(){
   alert("game over")
+  //show user score
+  //allow user to record score 
 }
 
 
@@ -116,7 +116,7 @@ showProgress();
 //display the new question on the HTML page 
 
 startBtn.addEventListener("click", prepareQuiz);
-questionBoxEl.addEventListener("click", askQuestion);
+// questionBoxEl.addEventListener("click", askQuestion);
 progressEl.addEventListener("click", showProgress);
 
 // userAnswer.addEventListener("click", userScore());

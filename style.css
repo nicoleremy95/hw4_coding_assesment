@@ -24,9 +24,7 @@ footer {
     padding-top: 100px;
 }
 
-p {
-    color: darkslategray
-}
+
 
 
 
@@ -39,6 +37,7 @@ p {
     border-style: solid;  
     
 }
+
 .btn {
     color: #FEF6EB;
     background-color:#C25B56;
@@ -57,10 +56,12 @@ p {
     padding: 10px;
     margin: 10px;
     content: justify-center;
+    font-size: 30px;
 }
 
 #progress {
     padding-top: 20px;
+    font-size: 20px;
 }
 
 #timer {

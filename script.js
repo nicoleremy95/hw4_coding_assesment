@@ -29,12 +29,6 @@ var questions = [
 var score = 0;
 var index = 0;
 
-function prepareQuiz(){
-  
-  runTimer();
-  askQuestion();
-}
-
 function runTimer() {
   var timeLeft = 10;
 
@@ -47,17 +41,18 @@ function runTimer() {
       endGame();
       clearInterval(timeInterval);
     }
+    else{
+      askQuestion();
+      showProgress();
+    }
 
   }, 1000);
   
 }
 
-// create a function that runs through the question rounds 
+// create a function that runs through the questions in the object "questions" 
  function askQuestion(questionNew,options,answer){
-   //start timer 
-  
     //create element
-
     questionBoxEl.textContent=questions[index].questionNew;
     //buttonsBtn.textContent=questions.options[i];
     ans0.textContent=questions[index].options[0];
@@ -66,8 +61,24 @@ function runTimer() {
     ans3.textContent=questions[index].options[3];
   
 }
+
+//run a function that cycles through the questions when a user clicks the answer choice
+function userAsnwer(event){
+  index++
+  if (index ===question.length){
+    endGame();
+  }
+  else{
+    askQuestion();
+  }
+}
+
+function showProgress(){
+  
+  progressEl.textContent = ("You have " + askQuestion() + "/" + questions.length)
+}
 //execute the function
-// askQuestion();
+showProgress();
 
 function endGame(){
   alert("game over")
@@ -75,18 +86,9 @@ function endGame(){
   //allow user to record score 
 }
 
-
-buttonsBtn.addEventListener("click",function(event){
-  console.log(event.target.textContent);
-  index++
-  if(index === question.length){
-    endGame();
-  } else {
-    askQuestion();
-  }
   
   
-})
+// })
 //create a function that calculates user score 
 // function userScore(){
 //   //set varibale userAnswer = whatever the user clicks 
@@ -101,13 +103,9 @@ buttonsBtn.addEventListener("click",function(event){
 // execute the function
 //  userScore();
 
-function showProgress(){
-  
-  progressEl.textContent = ("You have " + askQuestion() + "/" + questions.length)
-}
-//execute the function
-showProgress();
 //show user how many questions they have left with #progress 
+
+
 
 
 //show user final score by concatenating JavaScript string operators  
@@ -115,9 +113,11 @@ showProgress();
 
 //display the new question on the HTML page 
 
-startBtn.addEventListener("click", prepareQuiz);
-// questionBoxEl.addEventListener("click", askQuestion);
-progressEl.addEventListener("click", showProgress);
+startBtn.addEventListener("click", runTimer);
+ans0.addEventListener("click", userAsnwer);
+ans1.addEventListener("click", userAsnwer);
+ans2.addEventListener("click", userAsnwer);
+ans3.addEventListener("click", userAsnwer);
 
 // userAnswer.addEventListener("click", userScore());
 

@@ -8,6 +8,10 @@ var ans2 =document.querySelector("#btn2")
 var ans3 =document.querySelector("#btn3")
 var countDownEl = document.querySelector("#timer");
 var startBtn = document.querySelector("#start");
+var highScoreEl = document.querySelector("#highscore");
+var recordScoreCard = document.querySelector(".recordscorecard");
+var firstNameInput = document.querySelector("#first-name");
+var recordScoreBtn = document.querySelector("#recordscorebutton");
 // var welcomeStatement = document.querySelector("");
 // var endOfQuiz = document.querySelector("");
 
@@ -22,19 +26,24 @@ var questions = [
 
 // Create a number Data Type and set it equal to the variable "score". We start the game with a score of 0.
 var score = 0;
+// create a number Data Type and set it equal to teh varibale "index". We start the game with question index of 0.
 var index = 0;
+var timeLeft = 10;
 
 //FUNCTIONS 
 // Start with a welcome function IF NOT WORKING COMMENT OUT 
-// function welcome () {
-//   questionBoxEl.textContent = ("Welcome to the coding quiz! You have 60 seconds to complete this quiz. Click 'start' to begin");
-//   document.querySelector(".buttons").style.display = "none";
-//   document.querySelector("#progress").style.display ="none";
-// }
+function welcome () {
+  questionBoxEl.textContent = ("Welcome to the coding quiz! You have 60 seconds to complete this quiz. Click 'start' to begin");
+  document.querySelector(".buttons").style.display = "none";
+  document.querySelector("#progress").style.display ="none";
+  document.querySelector(".recordscorecard").style.display = "none";
+  document.querySelector("#start").style.display = "block";
+}
+welcome();
 
 //create function that starts timer on start button click 
 function runTimer() {
-  var timeLeft = 10;
+  // var timeLeft = 10;
 
   var timeInterval = setInterval(function() {
     countDownEl.textContent = timeLeft + " seconds remaining";
@@ -57,24 +66,25 @@ function runTimer() {
 
 // create a function that runs through the questions in the object "questions" 
  function askQuestion(questionNew,options,answer){
-    //create element
+    //create elements
     questionBoxEl.textContent=questions[index].questionNew;
-    //buttonsBtn.textContent=questions.options[i];
     ans0.textContent=questions[index].options[0];
     ans1.textContent=questions[index].options[1];
     ans2.textContent=questions[index].options[2];
     ans3.textContent=questions[index].options[3];
 
     document.querySelector("#start").style.display = "none";
-    
-  
+    document.querySelector(".recordscorecard").style.display = "none";
+    document.querySelector(".buttons").style.display = "block";
+    document.querySelector("#progress").style.display ="block"; 
 }
-
 
 //create a function that cycles through the questions when a user clicks the answer choice
 function userAnswer(event){
+  //add to the index (move to next question) when function is called
   index++
-  if (index === uestion.length){
+  //set conditions for end of game
+  if (index === questions.length){
     endGame();
   }
   else{
@@ -82,49 +92,55 @@ function userAnswer(event){
   }
 }
 
-function showProgress(){
-  
+//create a function that shows your progress
+function showProgress(){ 
   progressEl.textContent = (index + " / " + questions.length + " completed");
 }
-//execute the function
-showProgress();
 
 //IF NOT WORKING COMMENT OUT 
-// function userScore(){
-//   var userChoice = value of click 
-//   if(questions[index].answer === userChoice){
-//     score +++
-//   }
-// }
+function userScore() {
+  //add a point to the score if the answer is correct
+  if(event.target.textContent===questions[index].answer){
+    score++
+    console.log("correct");
+  } 
+}
 
 function endGame(){
-  
+  var timeLeft = 0;
+  var timeInterval = 0;
   clearInterval(timeInterval);
+
+
   //show user score
-  questionBoxEl.textContent = ("Congratulations, you got " + userChoice + " right!")
+  questionBoxEl.textContent = ("Congratulations, you got " + score + " right!");
   //allow user to record score 
+  document.querySelector(".recordscorecard").style.display = "block";
+  //use local storage to save user score
+  // if (firstNameInput === "") {
+  //   alert("error", "First name cannot be blank");
+  //show high score
+  // highScore.textContent = ("this is your high score");
   //remove excess components 
   document.querySelector("#progress").style.display = "none";
   document.querySelector(".buttons").style.display = "none";
-
+  document.querySelector("#highscore").style.display = "block";
+ 
 }
+// recordScoreBtn.addEventListener("click",function (event){
+//   event.preventDefault
+// }
 
 
-
-
-
-//show user final score by concatenating JavaScript string operators  
-// ("You got " + userScore() + "/" + questions.length)
-
-//display the new question on the HTML page 
-
+//event listeners 
 startBtn.addEventListener("click", runTimer);
 ans0.addEventListener("click", userAnswer);
 ans1.addEventListener("click", userAnswer);
 ans2.addEventListener("click", userAnswer);
 ans3.addEventListener("click", userAnswer);
 
-// userAnswer.addEventListener("click", userScore());
+
+
 
 
 

@@ -1,9 +1,4 @@
-//when the user clicks the start button, the timer starts 
-//when someone enters initials, it will show scores 
-//show high scores
-//OBJECTS WITH QUESTIONS AND ANSWERS 
-//when person selects wrong answer, the timer looses time
-//game over event when times runs out or 
+//VARIABLES 
 var questionBoxEl = document.querySelector("#questionbox");
 var buttonsBtn = document.querySelector(".buttons");
 var progressEl = document.querySelector("#progress");
@@ -29,6 +24,8 @@ var questions = [
 var score = 0;
 var index = 0;
 
+//FUNCTIONS 
+//create function that starts timer on start button click 
 function runTimer() {
   var timeLeft = 10;
 
@@ -62,7 +59,7 @@ function runTimer() {
   
 }
 
-//run a function that cycles through the questions when a user clicks the answer choice
+//create a function that cycles through the questions when a user clicks the answer choice
 function userAsnwer(event){
   index++
   if (index ===question.length){
@@ -75,10 +72,17 @@ function userAsnwer(event){
 
 function showProgress(){
   
-  progressEl.textContent = ("You have " + askQuestion() + "/" + questions.length)
+  progressEl.textContent = (index + " / " + questions.length + " remaining");
 }
 //execute the function
 showProgress();
+
+// function userScore(){
+//   var userChoice =
+//   if(questions[index].answer === userChoice){
+//     score +++
+//   }
+// }
 
 function endGame(){
   alert("game over")
@@ -127,20 +131,3 @@ ans3.addEventListener("click", userAsnwer);
 
 
 
-
-
-
-
-
-
-    // show question on the page associated with the #questions
-
-    // show the questions on the buttons
-
-// if user clicks button then allows the question to go to the next index
-
-    // record users answers and commpare them to the correct answer; boolean 
-
-    // update the users score for loop
-   
-    //timer if the user doesn't complete in given time use "break" and go to last page that shows score 

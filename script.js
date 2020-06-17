@@ -14,6 +14,7 @@ var firstNameInput = document.querySelector("#first-name");
 var recordScoreBtn = document.querySelector("#recordscorebutton");
 var timeInterval=""
 
+
 // create an object Data Type with questions,options, and answers 
 var questions = [
     {questionNew: "typeOf is a ?", options: ["method", "type","property", "string"], answer: "method"},
@@ -44,21 +45,19 @@ welcome();
 //create function that starts timer on start button click 
 function runTimer() {
   askQuestion();
+ 
     timeInterval = setInterval(function() {
     countDownEl.textContent = timeLeft + " seconds remaining";
     timeLeft--;
-
-
 
     if (timeLeft <= 0 ) {
       countDownEl.textContent = "";
       // document.querySelector("#timer").style.display = "none";
       endGame();
-      clearInterval(timeInterval);
-      
+      clearInterval(timeInterval);  
     }  
+
     else{
-      
       showProgress();
     }
 
@@ -142,31 +141,28 @@ function recordScore (event){
   event.preventDefault();
 
   // create name list and append to ul
-  const userNames = text => {
-    const li = document.createElement("li")
+  var userNames = text => {
+    var li = document.createElement("li")
     li.textContent = text;
     ul.appendChild(li);
   }
-   var userNameAndScore={
-    initials: firstNameInput.value.textContent,
+   var userNameAndScore = {
+    name: firstNameInput.value,
     score: score
   }
-  userNames(firstNameInput.value)
+
+  userNames(firstNameInput);
   
- 
-  //store names list 
-  var namesArray = [];
   localStorage.setItem("#first-name", JSON.stringify(userNameAndScore));
-  const data = JSON.parse(localStorage.getItem("#first-name"));
+  var namesArray = JSON.parse(localStorage.getItem("#first-name"));
 
-  // namesArray.push(firstNameInput.value)
-  // localStorage.setItem("#first-name", JSON.stringify(namesArray));
-  // data.forEach(firstNameInput =>{
-  //   userNames(firstNameInput);
-  // })
+  ul = namesArray;
 
-  //run welcome function
+  //run welcome function and set timeLeft to 60 seconds
+  timeLeft = 60;
   welcome();
+
+  // TODO: reset the show progress function 
 }
 
 //event listeners 

@@ -8,11 +8,12 @@ var ans2 =document.querySelector("#btn2")
 var ans3 =document.querySelector("#btn3")
 var countDownEl = document.querySelector("#timer");
 var startBtn = document.querySelector("#start");
-var ul = document.querySelector("ul");
+var userNames = document.querySelector("#usernames");
+var userScores = document.querySelector("#userscores");
 var recordScoreCard = document.querySelector(".recordscorecard");
 var firstNameInput = document.querySelector("#first-name");
 var recordScoreBtn = document.querySelector("#recordscorebutton");
-var timeInterval=""
+var timeInterval="";
 
 
 // create an object Data Type with questions,options, and answers 
@@ -39,6 +40,7 @@ function welcome () {
   document.querySelector("#progress").style.display ="none";
   document.querySelector(".recordscorecard").style.display = "none";
   document.querySelector("#start").style.display = "block";
+  
 }
 welcome();
 
@@ -115,6 +117,8 @@ function userAnswer(event){
 //create a function that shows your progress
 function showProgress(){ 
   progressEl.textContent = (index + " / " + questions.length + " completed");
+  
+  
 }
 
 //create a function that ends the game, prompts user to input score
@@ -141,25 +145,51 @@ function recordScore (event){
   event.preventDefault();
 
   // create name list and append to ul
-  var userNames = text => {
-    var li = document.createElement("li")
-    li.textContent = text;
-    ul.appendChild(li);
-  }
-   var userNameAndScore = {
-    name: firstNameInput.value,
-    score: score
-  }
+  // var liNames = text => {
+  //   var li = document.createElement("li")
+  //   li.textContent = text;
+  //   liNames.appendChild(li);
+  // };
+  // var liScores = text => {
+  //   var li = document.createElement("li")
+  //   li.textContent = text;
+  //   liScores.appendChild(li);
+  // };
 
-  userNames(firstNameInput);
+  //create variables for the user input 
+  var newName = firstNameInput.value;
+  var newScore = score;
+
+  //store user input locally 
+  localStorage.setItem("userNames", JSON.stringify(newName));
+  localStorage.getItem("userNames");
+ 
+
+  localStorage.setItem("userScores", JSON.stringify(newScore));
+  localStorage.getItem("userScores");
+
+  //give user input a value 
+  userNames.textContent = newName;
+  userScores.textContent = newScore;
+
+  //show user input on page 
+ 
+
+  // localStorage.setItem("userNames", JSON.stringify(newName));
+  // var lastUser = JSON.parse(localStorage.getItem("userNames"));
+ 
+
+  // localStorage.setItem("userScore", JSON.stringify(newScore));
+  // var lastScore = JSON.parse(localStorage.getItem("userScores"));
   
-  localStorage.setItem("#first-name", JSON.stringify(userNameAndScore));
-  var namesArray = JSON.parse(localStorage.getItem("#first-name"));
+  // userNames.textContent = lastUser
+  // userScores.textContent = lastScore
 
-  ul = namesArray;
+  // ul = namesArray;
 
   //run welcome function and set timeLeft to 60 seconds
   timeLeft = 60;
+  
   welcome();
 
   // TODO: reset the show progress function 

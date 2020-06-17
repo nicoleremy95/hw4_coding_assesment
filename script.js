@@ -12,7 +12,7 @@ var ul = document.querySelector("ul");
 var recordScoreCard = document.querySelector(".recordscorecard");
 var firstNameInput = document.querySelector("#first-name");
 var recordScoreBtn = document.querySelector("#recordscorebutton");
-
+var timeInterval=""
 
 // create an object Data Type with questions,options, and answers 
 var questions = [
@@ -43,19 +43,22 @@ welcome();
 
 //create function that starts timer on start button click 
 function runTimer() {
-  var timeInterval = setInterval(function() {
+  askQuestion();
+    timeInterval = setInterval(function() {
     countDownEl.textContent = timeLeft + " seconds remaining";
     timeLeft--;
 
-    if (timeLeft === 0) {
+
+
+    if (timeLeft <= 0 ) {
       countDownEl.textContent = "";
       // document.querySelector("#timer").style.display = "none";
       endGame();
       clearInterval(timeInterval);
-      return;
+      
     }  
     else{
-      askQuestion();
+      
       showProgress();
     }
 
@@ -64,8 +67,11 @@ function runTimer() {
 }
 
 // create a function that runs through the questions in the object "questions" 
- function askQuestion(questionNew,options,answer){
+ function askQuestion(){
     //create elements
+   console.log(index);
+   
+    
     questionBoxEl.textContent=questions[index].questionNew;
     ans0.textContent=questions[index].options[0];
     ans1.textContent=questions[index].options[1];
@@ -81,20 +87,28 @@ function runTimer() {
 //create a function that cycles through the questions when a user clicks the answer choice
 function userAnswer(event){
   //add to the index (move to next question) when function is called
-  index++
   
-  event.target.textContent===questions.answer;
-  score++
 
-  event.target.textContent!==questions.answer;
-  timeLeft-5;
- 
-  console.log("correct");
+  if( event.target.textContent===questions[index].answer){
+    score++
+    console.log("correct");
+  }
+  
+
+  if( event.target.textContent!==questions[index].answer){
+    timeLeft -= 5
+     console.log("wrong");
+  }
+  
+  
+  console.log(index);
+  
   //set conditions for end of game
-  if (index === questions.length){
+  if (index >= questions.length -1){
     endGame();
   }
   else {
+    index++
     askQuestion();
   }
 }
@@ -107,14 +121,14 @@ function showProgress(){
 //create a function that ends the game, prompts user to input score
 function endGame(){
   // clears the timer function 
-  clearInterval(runTimer);
+  clearInterval(timeInterval)
   //show user score
   questionBoxEl.textContent = ("Congratulations, you got " + score + " right!");
   //control display 
   document.querySelector(".recordscorecard").style.display = "block";
   document.querySelector("#progress").style.display = "none";
   document.querySelector(".buttons").style.display = "none";
-  document.querySelector("#highscore").style.display = "block";
+  // document.querySelector("#highscore").style.display = "block";
 }
 
 TODO: //create a function that displays messge if user does not input message 
@@ -133,19 +147,23 @@ function recordScore (event){
     li.textContent = text;
     ul.appendChild(li);
   }
+   var userNameAndScore={
+    initials: firstNameInput.value.textContent,
+    score: score
+  }
   userNames(firstNameInput.value)
-  firstNameInput.value = "" + score;
-
+  
+ 
   //store names list 
   var namesArray = [];
-  localStorage.setItem("#first-name", JSON.stringify(namesArray));
+  localStorage.setItem("#first-name", JSON.stringify(userNameAndScore));
   const data = JSON.parse(localStorage.getItem("#first-name"));
 
-  namesArray.push(firstNameInput.value)
-  localStorage.setItem("#first-name", JSON.stringify(namesArray));
-  data.forEach(firstNameInput =>{
-    userNames(firstNameInput);
-  })
+  // namesArray.push(firstNameInput.value)
+  // localStorage.setItem("#first-name", JSON.stringify(namesArray));
+  // data.forEach(firstNameInput =>{
+  //   userNames(firstNameInput);
+  // })
 
   //run welcome function
   welcome();

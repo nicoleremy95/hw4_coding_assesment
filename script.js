@@ -8,7 +8,7 @@ var ans2 =document.querySelector("#btn2")
 var ans3 =document.querySelector("#btn3")
 var countDownEl = document.querySelector("#timer");
 var startBtn = document.querySelector("#start");
-var highScoreEl = document.querySelector("#highscore");
+var ul = document.querySelector("ul");
 var recordScoreCard = document.querySelector(".recordscorecard");
 var firstNameInput = document.querySelector("#first-name");
 var recordScoreBtn = document.querySelector("#recordscorebutton");
@@ -49,10 +49,11 @@ function runTimer() {
 
     if (timeLeft === 0) {
       countDownEl.textContent = "";
-      document.querySelector("#timer").style.display = "none";
+      // document.querySelector("#timer").style.display = "none";
       endGame();
       clearInterval(timeInterval);
-    } 
+      return;
+    }  
     else{
       askQuestion();
       showProgress();
@@ -81,11 +82,19 @@ function runTimer() {
 function userAnswer(event){
   //add to the index (move to next question) when function is called
   index++
+  
+  event.target.textContent===questions.answer;
+  score++
+
+  event.target.textContent!==questions.answer;
+  timeLeft-5;
+ 
+  console.log("correct");
   //set conditions for end of game
   if (index === questions.length){
     endGame();
   }
-  else{
+  else {
     askQuestion();
   }
 }
@@ -96,39 +105,57 @@ function showProgress(){
 }
 
 //IF NOT WORKING COMMENT OUT 
-function userScore() {
-  //add a point to the score if the answer is correct
-  if(event.target.textContent===questions[index].answer){
-    score++
-    console.log("correct");
-  } 
-}
+// function userScore() {
+//   //add a point to the score if the answer is correct
+ 
+// }
 // userScore();
 
 function endGame(){
-  
   // clears the timer function 
   clearInterval(runTimer);
   //show user score
   questionBoxEl.textContent = ("Congratulations, you got " + score + " right!");
-  //allow user to record score 
+  //control display 
   document.querySelector(".recordscorecard").style.display = "block";
-  //use local storage to save user score
-  // if (firstNameInput === "") {
-  //   alert("error", "First name cannot be blank");
-  //show high score
-  // highScore.textContent = ("this is your high score");
-  //remove excess components 
   document.querySelector("#progress").style.display = "none";
   document.querySelector(".buttons").style.display = "none";
   document.querySelector("#highscore").style.display = "block";
  
 }
+
+TODO: //create a display messge if user does not input message 
+// function displayMessage(type, message) {
+//   msgDiv.textContent = message;
+//   msgDiv.setAttribute("class", type);
+// }
+
 function recordScore (event){
   event.preventDefault();
+
+  // create name list and append to ul
+  const userNames = text => {
+    const li = document.createElement("li")
+    li.textContent = text;
+    ul.appendChild(li);
+  }
+  userNames(firstNameInput.value)
+  firstNameInput.value = "" + score;
+
+  //store names list 
+  var namesArray = [];
+  localStorage.setItem("#first-name", JSON.stringify(namesArray));
+  const data = JSON.parse(localStorage.getItem("#first-name"));
+
+  namesArray.push(firstNameInput.value)
+  localStorage.setItem("#first-name", JSON.stringify(namesArray));
+  data.forEach(firstNameInput =>{
+    userNames(firstNameInput);
+  })
+
+  //run welcome function
+  welcome();
 }
-
-
 
 //event listeners 
 startBtn.addEventListener("click", runTimer);

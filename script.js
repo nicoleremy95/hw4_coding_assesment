@@ -12,8 +12,7 @@ var ul = document.querySelector("ul");
 var recordScoreCard = document.querySelector(".recordscorecard");
 var firstNameInput = document.querySelector("#first-name");
 var recordScoreBtn = document.querySelector("#recordscorebutton");
-// var welcomeStatement = document.querySelector("");
-// var endOfQuiz = document.querySelector("");
+
 
 // create an object Data Type with questions,options, and answers 
 var questions = [
@@ -28,10 +27,11 @@ var questions = [
 var score = 0;
 // create a number Data Type and set it equal to teh varibale "index". We start the game with question index of 0.
 var index = 0;
-var timeLeft = 10;
+//create a number Data Type and set it equal to the variable "timeLeft". The game starts with 60 seconds. 
+var timeLeft = 60;
 
 //FUNCTIONS 
-// Start with a welcome function IF NOT WORKING COMMENT OUT 
+// Start with a welcome function  
 function welcome () {
   questionBoxEl.textContent = ('Welcome to the coding quiz! You have 60 seconds to complete this quiz. Click "start" to begin!');
   document.querySelector(".buttons").style.display = "none";
@@ -104,13 +104,7 @@ function showProgress(){
   progressEl.textContent = (index + " / " + questions.length + " completed");
 }
 
-//IF NOT WORKING COMMENT OUT 
-// function userScore() {
-//   //add a point to the score if the answer is correct
- 
-// }
-// userScore();
-
+//create a function that ends the game, prompts user to input score
 function endGame(){
   // clears the timer function 
   clearInterval(runTimer);
@@ -121,15 +115,15 @@ function endGame(){
   document.querySelector("#progress").style.display = "none";
   document.querySelector(".buttons").style.display = "none";
   document.querySelector("#highscore").style.display = "block";
- 
 }
 
-TODO: //create a display messge if user does not input message 
+TODO: //create a function that displays messge if user does not input message 
 // function displayMessage(type, message) {
 //   msgDiv.textContent = message;
 //   msgDiv.setAttribute("class", type);
 // }
 
+//create a function that records the user score and brings you back to the welcome page 
 function recordScore (event){
   event.preventDefault();
 

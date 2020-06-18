@@ -144,6 +144,7 @@ function recordScore (event){
   var scoresArray = localStorage.getItem("scores")?
   JSON.parse(localStorage.getItem("scores")) : []
 
+  // local storage names 
   localStorage.setItem("names", JSON.stringify(namesArray))
   var nameData = JSON.parse(localStorage.getItem("names"))
 

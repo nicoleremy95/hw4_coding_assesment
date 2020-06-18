@@ -8,9 +8,7 @@ var ans2 =document.querySelector("#btn2")
 var ans3 =document.querySelector("#btn3")
 var countDownEl = document.querySelector("#timer");
 var startBtn = document.querySelector("#start");
-
 var recordScoreCard = document.querySelector(".recordscorecard");
-
 var recordScoreBtn = document.querySelector("#recordscorebutton");
 var timeInterval="";
 
@@ -122,13 +120,11 @@ function endGame(){
   // document.querySelector("#highscore").style.display = "block";
 }
 
-TODO: //create a function that displays messge if user does not input message 
-
-
 //create a function that records the user score and brings you back to the welcome page 
 function recordScore (event){
+  //keep browswer from refreshing when clicking button 
   event.preventDefault();
-
+  //set variables 
   var userNamesUl = document.querySelector("#usernamesul");
   var firstNameInput = document.querySelector("#first-name").value;
   userNamesUl.innerHTML = "";
@@ -137,34 +133,40 @@ function recordScore (event){
   timeLeft = 60;
   index = 0;
   score = 0;
+
   //run welcome function
   welcome();
   
+  //create object with the user firstNameInput and their score 
   var newUserAndScore = {
     name: firstNameInput,
     score
   }
-  console.log(newUserAndScore);
+
+  // if there is a value in the namesAndScoreArray, then turn it into a string and get item 
   var namesAndScoreArray = localStorage.getItem("namesAndScore") ?
   JSON.parse(localStorage.getItem("namesAndScore")) : []
+
+  //push object into array 
   namesAndScoreArray.push(newUserAndScore);
 
+  //create a new li item and append it to the page 
   var liMaker = userObject => {
     var li = document.createElement("li")
     li.textContent = `${userObject.name} ${userObject.score}`
     userNamesUl.appendChild(li)
   }
 
+  //run a for loop and create a new li element for each array item 
   namesAndScoreArray.forEach(user => {
     liMaker(user)
   })
 
+  //add new user name and score to local storage and turn it back into an object 
   localStorage.setItem("namesAndScore", JSON.stringify(namesAndScoreArray))
-  
-
 }
 
-//event listeners 
+//EVENT LISTENERS 
 startBtn.addEventListener("click", runTimer);
 ans0.addEventListener("click", userAnswer);
 ans1.addEventListener("click", userAnswer);

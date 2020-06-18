@@ -129,6 +129,10 @@ TODO: //create a function that displays messge if user does not input message
 function recordScore (event){
   event.preventDefault();
 
+  var userNamesUl = document.querySelector("#usernamesul");
+  var firstNameInput = document.querySelector("#first-name").value;
+  userNamesUl.innerHTML = "";
+
   // reset timeLeft, index, and score
   timeLeft = 60;
   index = 0;
@@ -136,102 +140,28 @@ function recordScore (event){
   //run welcome function
   welcome();
   
-  var userNamesUl = document.querySelector("#usernamesul");
-  var userScoresUl = document.querySelector("#userscoresul");
-  var firstNameInput = document.querySelector("#first-name");
-  var namesArray = localStorage.getItem("names") ?
-  JSON.parse(localStorage.getItem("names")) : []
-  var scoresArray = localStorage.getItem("scores")?
-  JSON.parse(localStorage.getItem("scores")) : []
+  var newUserAndScore = {
+    name: firstNameInput,
+    score
+  }
+  console.log(newUserAndScore);
+  var namesAndScoreArray = localStorage.getItem("namesAndScore") ?
+  JSON.parse(localStorage.getItem("namesAndScore")) : []
+  namesAndScoreArray.push(newUserAndScore);
 
-  // local storage names 
-  localStorage.setItem("names", JSON.stringify(namesArray))
-  var nameData = JSON.parse(localStorage.getItem("names"))
-
-  var liMakerName = text => {
+  var liMaker = userObject => {
     var li = document.createElement("li")
-    li.textContent = text
+    li.textContent = `${userObject.name} ${userObject.score}`
     userNamesUl.appendChild(li)
   }
 
-  namesArray.push(firstNameInput.value)
-  localStorage.setItem("names", JSON.stringify(namesArray))
-  liMakerName(firstNameInput.value)
-  firstNameInput.value = ""
-
-  nameData.forEach(name => {
-    liMaker(name)
+  namesAndScoreArray.forEach(user => {
+    liMaker(user)
   })
 
+  localStorage.setItem("namesAndScore", JSON.stringify(namesAndScoreArray))
   
-  
 
-
-
-
-
-
- // create variables for the user input 
-  // var newName = firstNameInput.value;
-  // console.log(newName);
-  // var newScore = score;
-  // console.log(newScore);
-
-  // if (newName){
-  //   localStorage.setItem(newName)
-  // }
-
-  // for (i=0; i<localStorage.length; i++){
-  //   var newName = localStorage.newName(i);
-  //   userNamesUl.innerHTML+=`${newName}`;
-  // }
-
-  // if (newScore){
-  //   localStorage.setItem(newScore)
-  // }
-
-  // for (i=0; i<localStorage.length; i++){
-  //   var newScore = localStorage.newScore(i);
-  //   userScoresUl.innerHTML+=`${newScore}`;
-  // }
-
-
-
-
-
-
-
-
-
-  // var namesArray = [];
-  // var scoresArray = [];
-  //store user name locally 
-  // localStorage.setItem("userNamesUl", JSON.stringify(newName));
-  // localStorage.getItem("userNamesUl");
-
-  // //store user score locally 
-  // localStorage.setItem("userScoresUl", JSON.stringify(newScore));
-  // localStorage.getItem("userScoresUl");
-
-  // //give user input a value 
-  // userNamesUl.textContent = newName;
-  // userScoresUl.textContent = newScore;
-
-  // // create name list and append to ul
-  // liMakerName = text => {
-  //   var li = document.createElement("li")
-  //   li.textContent = text;
-  //   userNamesUl.appendChild(li);
-  // };
-  // // liMakerName();
-  //  liMakerScore = text => {
-  //   var li = document.createElement("li")
-  //   li.textContent = text;
-  //   userScoresUl.appendChild(li);
-  // };
-  // liMakerScore();
-
-  
 }
 
 //event listeners 
@@ -241,13 +171,3 @@ ans1.addEventListener("click", userAnswer);
 ans2.addEventListener("click", userAnswer);
 ans3.addEventListener("click", userAnswer);
 recordScoreBtn.addEventListener("click", recordScore);
-
-
-
-
-
-
-
-
-
-

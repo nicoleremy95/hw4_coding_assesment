@@ -13,7 +13,7 @@ This quiz also uses local storage to keep track of the user's score. The quiz th
 
 ### Step 1
 
-![step 1](hw4_coding_assesment/images_readme/Screen Shot 2020-06-17 at 8.35.46 PM.png)
+![step 1](hw4_coding_assesment/images_readme/step1.png)
 
 ### Step 2
 

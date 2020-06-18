@@ -16,6 +16,7 @@ var recordScoreBtn = document.querySelector("#recordscorebutton");
 var timeInterval="";
 
 
+
 // create an object Data Type with questions,options, and answers 
 var questions = [
     {questionNew: "typeOf is a ?", options: ["method", "type","property", "string"], answer: "method"},
@@ -40,7 +41,6 @@ function welcome () {
   document.querySelector("#progress").style.display ="none";
   document.querySelector(".recordscorecard").style.display = "none";
   document.querySelector("#start").style.display = "block";
-  
 }
 welcome();
 
@@ -70,15 +70,12 @@ function runTimer() {
 // create a function that runs through the questions in the object "questions" 
  function askQuestion(){
     //create elements
-   console.log(index);
-   
-    
     questionBoxEl.textContent=questions[index].questionNew;
     ans0.textContent=questions[index].options[0];
     ans1.textContent=questions[index].options[1];
     ans2.textContent=questions[index].options[2];
     ans3.textContent=questions[index].options[3];
-
+    //control visibility
     document.querySelector("#start").style.display = "none";
     document.querySelector(".recordscorecard").style.display = "none";
     document.querySelector(".buttons").style.display = "block";
@@ -87,22 +84,16 @@ function runTimer() {
 
 //create a function that cycles through the questions when a user clicks the answer choice
 function userAnswer(event){
-  //add to the index (move to next question) when function is called
-  
-
+  //add to score if answer is correct 
   if( event.target.textContent===questions[index].answer){
     score++
     console.log("correct");
   }
-  
-
+  //subtract time if answer is incorrect 
   if( event.target.textContent!==questions[index].answer){
     timeLeft -= 5
      console.log("wrong");
   }
-  
-  
-  console.log(index);
   
   //set conditions for end of game
   if (index >= questions.length -1){
@@ -117,8 +108,6 @@ function userAnswer(event){
 //create a function that shows your progress
 function showProgress(){ 
   progressEl.textContent = (index + " / " + questions.length + " completed");
-  
-  
 }
 
 //create a function that ends the game, prompts user to input score
@@ -135,27 +124,25 @@ function endGame(){
 }
 
 TODO: //create a function that displays messge if user does not input message 
-// function displayMessage(type, message) {
-//   msgDiv.textContent = message;
-//   msgDiv.setAttribute("class", type);
-// }
+
 
 //create a function that records the user score and brings you back to the welcome page 
 function recordScore (event){
   event.preventDefault();
-  //create variables for the user input 
+  
+
+  // create variables for the user input 
   var newName = firstNameInput.value;
   var newScore = score;
-
+  // var namesArray = [];
+  // var scoresArray = [];
   //store user name locally 
   localStorage.setItem("userNamesUl", JSON.stringify(newName));
   localStorage.getItem("userNamesUl");
-  // liMakerName(newName.value);
-  
+
   //store user score locally 
   localStorage.setItem("userScoresUl", JSON.stringify(newScore));
   localStorage.getItem("userScoresUl");
-  // liMakerName(newScore.value);
 
   //give user input a value 
   userNamesUl.textContent = newName;
@@ -165,22 +152,22 @@ function recordScore (event){
   liMakerName = text => {
     var li = document.createElement("li")
     li.textContent = text;
-    newNameUl.appendChild(li);
+    userNamesUl.appendChild(li);
   };
+  // liMakerName();
    liMakerScore = text => {
     var li = document.createElement("li")
     li.textContent = text;
-    newScoreUl.appendChild(li);
+    userScoresUl.appendChild(li);
   };
+  // liMakerScore();
 
-  //run welcome function and set timeLeft to 60 seconds
+  // reset timeLeft, index, and score
   timeLeft = 60;
   index = 0;
   score = 0;
-  // progressEl.textContent = 0
+  //run welcome function
   welcome();
-
-  // TODO: reset the show progress function 
 }
 
 //event listeners 

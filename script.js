@@ -8,8 +8,8 @@ var ans2 =document.querySelector("#btn2")
 var ans3 =document.querySelector("#btn3")
 var countDownEl = document.querySelector("#timer");
 var startBtn = document.querySelector("#start");
-var userNames = document.querySelector("#usernames");
-var userScores = document.querySelector("#userscores");
+var userNamesUl = document.querySelector("#usernamesul");
+var userScoresUl = document.querySelector("#userscoresul");
 var recordScoreCard = document.querySelector(".recordscorecard");
 var firstNameInput = document.querySelector("#first-name");
 var recordScoreBtn = document.querySelector("#recordscorebutton");
@@ -143,53 +143,41 @@ TODO: //create a function that displays messge if user does not input message
 //create a function that records the user score and brings you back to the welcome page 
 function recordScore (event){
   event.preventDefault();
-
-  // create name list and append to ul
-  // var liNames = text => {
-  //   var li = document.createElement("li")
-  //   li.textContent = text;
-  //   liNames.appendChild(li);
-  // };
-  // var liScores = text => {
-  //   var li = document.createElement("li")
-  //   li.textContent = text;
-  //   liScores.appendChild(li);
-  // };
-
   //create variables for the user input 
   var newName = firstNameInput.value;
   var newScore = score;
 
-  //store user input locally 
-  localStorage.setItem("userNames", JSON.stringify(newName));
-  localStorage.getItem("userNames");
- 
-
-  localStorage.setItem("userScores", JSON.stringify(newScore));
-  localStorage.getItem("userScores");
+  //store user name locally 
+  localStorage.setItem("userNamesUl", JSON.stringify(newName));
+  localStorage.getItem("userNamesUl");
+  // liMakerName(newName.value);
+  
+  //store user score locally 
+  localStorage.setItem("userScoresUl", JSON.stringify(newScore));
+  localStorage.getItem("userScoresUl");
+  // liMakerName(newScore.value);
 
   //give user input a value 
-  userNames.textContent = newName;
-  userScores.textContent = newScore;
+  userNamesUl.textContent = newName;
+  userScoresUl.textContent = newScore;
 
-  //show user input on page 
- 
-
-  // localStorage.setItem("userNames", JSON.stringify(newName));
-  // var lastUser = JSON.parse(localStorage.getItem("userNames"));
- 
-
-  // localStorage.setItem("userScore", JSON.stringify(newScore));
-  // var lastScore = JSON.parse(localStorage.getItem("userScores"));
-  
-  // userNames.textContent = lastUser
-  // userScores.textContent = lastScore
-
-  // ul = namesArray;
+  // create name list and append to ul
+  liMakerName = text => {
+    var li = document.createElement("li")
+    li.textContent = text;
+    newNameUl.appendChild(li);
+  };
+   liMakerScore = text => {
+    var li = document.createElement("li")
+    li.textContent = text;
+    newScoreUl.appendChild(li);
+  };
 
   //run welcome function and set timeLeft to 60 seconds
   timeLeft = 60;
-  
+  index = 0;
+  score = 0;
+  // progressEl.textContent = 0
   welcome();
 
   // TODO: reset the show progress function 

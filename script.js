@@ -8,10 +8,9 @@ var ans2 =document.querySelector("#btn2")
 var ans3 =document.querySelector("#btn3")
 var countDownEl = document.querySelector("#timer");
 var startBtn = document.querySelector("#start");
-var userNamesUl = document.querySelector("#usernamesul");
-var userScoresUl = document.querySelector("#userscoresul");
+
 var recordScoreCard = document.querySelector(".recordscorecard");
-var firstNameInput = document.querySelector("#first-name");
+
 var recordScoreBtn = document.querySelector("#recordscorebutton");
 var timeInterval="";
 
@@ -129,38 +128,6 @@ TODO: //create a function that displays messge if user does not input message
 //create a function that records the user score and brings you back to the welcome page 
 function recordScore (event){
   event.preventDefault();
-  
-
-  // create variables for the user input 
-  var newName = firstNameInput.value;
-  var newScore = score;
-  // var namesArray = [];
-  // var scoresArray = [];
-  //store user name locally 
-  localStorage.setItem("userNamesUl", JSON.stringify(newName));
-  localStorage.getItem("userNamesUl");
-
-  //store user score locally 
-  localStorage.setItem("userScoresUl", JSON.stringify(newScore));
-  localStorage.getItem("userScoresUl");
-
-  //give user input a value 
-  userNamesUl.textContent = newName;
-  userScoresUl.textContent = newScore;
-
-  // create name list and append to ul
-  liMakerName = text => {
-    var li = document.createElement("li")
-    li.textContent = text;
-    userNamesUl.appendChild(li);
-  };
-  // liMakerName();
-   liMakerScore = text => {
-    var li = document.createElement("li")
-    li.textContent = text;
-    userScoresUl.appendChild(li);
-  };
-  // liMakerScore();
 
   // reset timeLeft, index, and score
   timeLeft = 60;
@@ -168,6 +135,102 @@ function recordScore (event){
   score = 0;
   //run welcome function
   welcome();
+  
+  var userNamesUl = document.querySelector("#usernamesul");
+  var userScoresUl = document.querySelector("#userscoresul");
+  var firstNameInput = document.querySelector("#first-name");
+  var namesArray = localStorage.getItem("names") ?
+  JSON.parse(localStorage.getItem("names")) : []
+  var scoresArray = localStorage.getItem("scores")?
+  JSON.parse(localStorage.getItem("scores")) : []
+
+  localStorage.setItem("names", JSON.stringify(namesArray))
+  var nameData = JSON.parse(localStorage.getItem("names"))
+
+  var liMakerName = text => {
+    var li = document.createElement("li")
+    li.textContent = text
+    userNamesUl.appendChild(li)
+  }
+
+  namesArray.push(firstNameInput.value)
+  localStorage.setItem("names", JSON.stringify(namesArray))
+  liMakerName(firstNameInput.value)
+  firstNameInput.value = ""
+
+  nameData.forEach(name => {
+    liMaker(name)
+  })
+
+  
+  
+
+
+
+
+
+
+ // create variables for the user input 
+  // var newName = firstNameInput.value;
+  // console.log(newName);
+  // var newScore = score;
+  // console.log(newScore);
+
+  // if (newName){
+  //   localStorage.setItem(newName)
+  // }
+
+  // for (i=0; i<localStorage.length; i++){
+  //   var newName = localStorage.newName(i);
+  //   userNamesUl.innerHTML+=`${newName}`;
+  // }
+
+  // if (newScore){
+  //   localStorage.setItem(newScore)
+  // }
+
+  // for (i=0; i<localStorage.length; i++){
+  //   var newScore = localStorage.newScore(i);
+  //   userScoresUl.innerHTML+=`${newScore}`;
+  // }
+
+
+
+
+
+
+
+
+
+  // var namesArray = [];
+  // var scoresArray = [];
+  //store user name locally 
+  // localStorage.setItem("userNamesUl", JSON.stringify(newName));
+  // localStorage.getItem("userNamesUl");
+
+  // //store user score locally 
+  // localStorage.setItem("userScoresUl", JSON.stringify(newScore));
+  // localStorage.getItem("userScoresUl");
+
+  // //give user input a value 
+  // userNamesUl.textContent = newName;
+  // userScoresUl.textContent = newScore;
+
+  // // create name list and append to ul
+  // liMakerName = text => {
+  //   var li = document.createElement("li")
+  //   li.textContent = text;
+  //   userNamesUl.appendChild(li);
+  // };
+  // // liMakerName();
+  //  liMakerScore = text => {
+  //   var li = document.createElement("li")
+  //   li.textContent = text;
+  //   userScoresUl.appendChild(li);
+  // };
+  // liMakerScore();
+
+  
 }
 
 //event listeners 
